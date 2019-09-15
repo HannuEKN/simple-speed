@@ -4,6 +4,7 @@
 # gnome-disks
 # systemd-analyze plot > boot.svg
 
+# dd iflag=fullblock if=/dev/urandom of=/dev/null  bs=100M count=1
 
 if [ -r "$(which hbasics)" ] ; then
   source hbasics # lsdisk.sh 
@@ -25,13 +26,13 @@ if [ ! -z "$(type -a lsdisk)" ] ; then
     echo "lsdisk failed to provide /dev/... , cannot automatically run hdparm"
   fi
 else
-  echo "No lsdisk, cannot find out the required device name /dev/..."
+  echo "No lsdisk, cannot find out the device name /dev/... to allow running hdparm"
 fi
 
 
 tf=./tempfile
-blksize="4k"     ;bznumeric=4096
-blkcount=256000  ;bcnumeric=$blkcount
+blksize="2k"     ;bznumeric=2048
+blkcount=51200   ;bcnumeric=$blkcount
 
 echo -e "\n\nSetup: $blkcount blocks of $blksize, a total of $(($bcnumeric * $bznumeric )) bytes."
 
